@@ -1,20 +1,40 @@
-import instaloader
+import sys
 import os
-import pandas as pd
 from datetime import datetime, timedelta
 import time
 import csv
+import pandas as pd
+import instaloader
 
 #for recording time
 total_time = 0
 successful_accounts = 0
 error_accounts = 0
 
+# Get the current day of the week
+current_day = datetime.now().strftime('%a')
 
-# Get instance
-L = instaloader.Instaloader()
+# Use the current day to set the target list
+# To divide script workload, preventing from getting banned by IG
+if current_day == 'Mon':
+    target_list = 'target_accounts_0.csv'
+elif current_day == 'Wed':
+    target_list = 'target_accounts_1.csv'
+elif current_day == 'Fri':
+    target_list = 'target_accounts_2.csv'
+elif current_day == 'Sat':
+    target_list = 'target_accounts_3.csv'
+else:
+    target_list = None
 
-df = pd.read_csv('target_accounts_copy.csv')
+if target_list is not None:
+    print(f"Today is {current_day}, using target list: {target_list}")
+else:
+    print(f"Today is {current_day}, no target list for today")
+    sys.exit()
+
+L = instaloader.Instaloader() # Get instance
+df = pd.read_csv(target_list)
 ig_accounts = df['Shop'].tolist()
 
 for i, account in enumerate(ig_accounts, start=1):
