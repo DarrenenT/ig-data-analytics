@@ -83,7 +83,7 @@ for i, account in enumerate(ig_accounts, start=1):
 
             # Write the data
             writer.writerow([ig_acc_name, 
-                            current_date.strftime('%Y-%m-%d'), 
+                            current_date.strftime('%d-%b-%y'), 
                             bio, 
                             no_of_posts, 
                             no_of_followers, 
