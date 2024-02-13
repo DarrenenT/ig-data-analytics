@@ -57,7 +57,7 @@ for i, account in enumerate(ig_accounts, start=1):
             if post.date_utc > one_week_ago:
                 posts_in_last_week += 1
                 likes_in_last_week += post.likes
-                time.sleep(1)  # sleep for 1 second
+                time.sleep(2)  # sleep for 2 second
             else :
                 skip_pinpost -= 1
                 if skip_pinpost == 0:
@@ -89,7 +89,9 @@ for i, account in enumerate(ig_accounts, start=1):
                             no_of_followers, 
                             posts_in_last_week, 
                             average_likes_per_post])
-
+            
+        time.sleep(2)  # sleep for 2 second
+        
         time_taken = time.time() - start_time
         total_time += time_taken
         successful_accounts += 1
